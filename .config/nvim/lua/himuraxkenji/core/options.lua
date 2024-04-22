@@ -42,3 +42,4 @@ opt.splitbelow = true
 opt.iskeyword:append("-")
 
 opt.conceallevel = 3 -- Hide * markup for bold and italic
+opt.foldmethod = "indent"

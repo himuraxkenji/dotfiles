@@ -8,9 +8,13 @@
 - lazygit
 
 
+**asdasd**
+
 ## Installation
 Clone this repository inside `~/.config/nvim` and open nvim.
 
 ```plantumlasdasddasd
-asdasd
+    asdasd
+    
+    
 ``````
