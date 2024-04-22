@@ -1,5 +1,5 @@
 autoload -U compinit && compinit
-plugins=(git aliases zsh-autosuggestions zsh-syntax-highlighting zsh-completions zsh-direnv)
+plugins=(git aliases zsh-autosuggestions zsh-syntax-highlighting zsh-completions direnv)
 
 # Load configurations
 source $ZSH/oh-my-zsh.sh

@@ -13,6 +13,26 @@ return {
 
     telescope.setup({
       defaults = {
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
+
+          -- Exclude some patterns from search
+          "--glob=!**/.git/*",
+          "--glob=!**/.idea/*",
+          "--glob=!**/.vscode/*",
+          "--glob=!**/build/*",
+          "--glob=!**/dist/*",
+          "--glob=!**/yarn.lock",
+          "--glob=!**/package-lock.json",
+        },
+
         path_display = { "smart" },
         mappings = {
           i = {
@@ -22,6 +42,28 @@ return {
             ["<c-t>"] = trouble.open_with_trouble,
           },
           n = { ["<c-t>"] = trouble.open_with_trouble },
+        },
+        find_files = {
+          hidden = true,
+        },
+      },
+      pickers = {
+        find_files = {
+          hidden = true,
+          -- needed to exclude some files & dirs from general search
+          -- when not included or specified in .gitignore
+          find_command = {
+            "rg",
+            "--files",
+            "--hidden",
+            "--glob=!**/.git/*",
+            "--glob=!**/.idea/*",
+            "--glob=!**/.vscode/*",
+            "--glob=!**/build/*",
+            "--glob=!**/dist/*",
+            "--glob=!**/yarn.lock",
+            "--glob=!**/package-lock.json",
+          },
         },
       },
     })
@@ -33,8 +75,8 @@ return {
     -- then use it, you can also use the `:Telescope rest select_env` command
     -- require("telescope").extensions.rest.select_env()
 
-    -- set keymaps
     local keymap = vim.keymap -- for conciseness
+    -- set keymaps
 
     keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
     keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
