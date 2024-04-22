@@ -15,15 +15,12 @@ opt.autoindent = true -- copy indent from current line when starting new one
 -- line wrapping
 opt.wrap = false
 
-
 -- search settings
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mix case in your search, assumes you want case-sensitive
 
-
 -- cursor line
 opt.cursorline = true
-
 
 -- appeareance
 -- turn on termguicolors for tokyonight colorscheme to work
@@ -44,4 +41,4 @@ opt.splitbelow = true
 
 opt.iskeyword:append("-")
 
-
+opt.conceallevel = 3 -- Hide * markup for bold and italic
