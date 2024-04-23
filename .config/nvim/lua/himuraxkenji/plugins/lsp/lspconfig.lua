@@ -137,6 +137,27 @@ return {
             end,
           })
         end,
+        ["angularls"] = function()
+          local default_node_modules = vim.fn.getcwd() .. "/node_modules"
+
+          local ngls_cmd = {
+            "ngserver",
+            "--stdio",
+            "--tsProbeLocations",
+            default_node_modules,
+            "--ngProbeLocations",
+            default_node_modules,
+            "--experimental-ivy",
+          }
+
+          lspconfig.angularls.setup({
+            cmd = ngls_cmd,
+            capabilities = capabilities,
+            on_new_config = function(new_config)
+              new_config.cmd = ngls_cmd
+            end,
+          })
+        end,
         ["graphql"] = function()
           -- configure graphql language server
           lspconfig["graphql"].setup({
