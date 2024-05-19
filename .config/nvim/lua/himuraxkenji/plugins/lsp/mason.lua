@@ -53,6 +53,11 @@ return {
         "pylint", -- python linter
         "eslint_d", -- js linter
         "gopls", -- go formatter
+        "goimports",
+        "gofumpt",
+        "gomodifytags",
+        "impl",
+        "delve",
       },
     })
   end,

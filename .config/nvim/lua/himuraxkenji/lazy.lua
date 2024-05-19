@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   { import = "himuraxkenji.plugins" },
-  -- { import = "himuraxkenji.plugins.lsp" },
+  { import = "himuraxkenji.plugins.lsp" },
   { import = "himuraxkenji.plugins.coding" },
   { import = "himuraxkenji.plugins.ui" },
   { import = "himuraxkenji.plugins.git" },

@@ -1,5 +1,19 @@
 return {
   {
+    "ray-x/go.nvim",
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+  },
+  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -10,6 +24,7 @@ return {
     config = function()
       -- import lspconfig plugin
       local lspconfig = require("lspconfig")
+      local util = require("lspconfig/util")
 
       -- import mason_lspconfig plugin
       local mason_lspconfig = require("mason-lspconfig")
@@ -34,7 +49,7 @@ return {
           keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
           opts.desc = "Show LSP definitions"
-          keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+          keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- show lsp definitions
 
           opts.desc = "Show LSP implementations"
           keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
@@ -153,21 +168,54 @@ return {
             },
           })
         end,
+        ["gopls"] = function()
+          lspconfig["gopls"].setup({
+            capabilities = capabilities,
+            cmd = { "gopls" },
+            filetype = { "go", "gomod", "gowork", "gotmpl" },
+            cmd_env = {
+              GOFLAGS = "-tags=test,e2e_test,integration_test,acceptance_test",
+            },
+            root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+            settings = {
+              gopls = {
+                gofumpt = true,
+                codelenses = {
+                  gc_details = false,
+                  generate = true,
+                  regenerate_cgo = true,
+                  run_govulncheck = true,
+                  test = true,
+                  tidy = true,
+                  upgrade_dependency = true,
+                  vendor = true,
+                },
+                -- hints = {
+                --   assignVariableTypes = true,
+                --   compositeLiteralFields = true,
+                --   compositeLiteralTypes = true,
+                --   constantValues = true,
+                --   functionTypeParameters = true,
+                --   parameterNames = true,
+                --   rangeVariableTypes = true,
+                -- },
+                analyses = {
+                  fieldalignment = true,
+                  nilness = true,
+                  unusedparams = true,
+                  unusedwrite = true,
+                  useany = true,
+                },
+                usePlaceholders = true,
+                completeUnimported = true,
+                staticcheck = true,
+                directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+                semanticTokens = true,
+              },
+            },
+          })
+        end,
       })
     end,
   },
-  {
-    "ray-x/go.nvim",
-    dependencies = {  -- optional packages
-      "ray-x/guihua.lua",
-      "neovim/nvim-lspconfig",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      require("go").setup()
-    end,
-    event = {"CmdlineEnter"},
-    ft = {"go", 'gomod'},
-    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-  }
 }
