@@ -78,6 +78,14 @@ return {
     local keymap = vim.keymap -- for conciseness
     -- set keymaps
 
+    keymap.set(
+      "n",
+      "<leader><leader>",
+      "<cmd>Telescope smart_open<cr>",
+      { desc = "Fuzzy find smart open", noremap = true }
+    )
+    keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", { desc = "Fuzzy find undo history", noremap = true })
+    keymap.set("n", "<leader>fm", "<cmd>Telescope media_files<cr>", { desc = "Fuzzy find media files", noremap = true })
     keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
     keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
     keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })

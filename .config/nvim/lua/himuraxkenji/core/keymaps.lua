@@ -84,3 +84,7 @@ vim.api.nvim_set_keymap("x", "<A-j>", "<Nop>", { noremap = true, silent = true }
 vim.api.nvim_set_keymap("x", "<A-k>", "<Nop>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("x", "J", "<Nop>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("x", "K", "<Nop>", { noremap = true, silent = true })
+
+keymap.set("n", "i", function()
+  return string.match(vim.api.nvim_get_current_line(), "%g") == nil and "cc" or "i"
+end, { expr = true, noremap = true })
