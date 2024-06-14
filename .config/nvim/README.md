@@ -1,13 +1,4 @@
-# NVIM LUA
+# 💤 LazyVim
 
-## Install
-
-- nvim
-- nodejs
-- nerd fonts (and set in terminal )
-- ripgrep (for telescope)
-- lazygit
-
-## Installation
-
-Clone this repository inside `~/.config/nvim` and open nvim.
+A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
+Refer to the [documentation](https://lazyvim.github.io/installation) to get started.

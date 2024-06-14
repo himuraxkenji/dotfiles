@@ -4,7 +4,13 @@
 --
 --
 local set = vim.keymap.set
-set("n", "<leader>wl", "<C-W>w", { desc = "Save file", remap = true })
+
+set({ "n", "t" }, "<C-h>", "<CMD>NavigatorLeft<CR>", { desc = "Navigate Left", silent = true })
+set({ "n", "t" }, "<C-l>", "<CMD>NavigatorRight<CR>", { desc = "Navigate Right", silent = true })
+set({ "n", "t" }, "<C-k>", "<CMD>NavigatorUp<CR>", { desc = "Navigate Up", silent = true })
+set({ "n", "t" }, "<C-j>", "<CMD>NavigatorDown<CR>", { desc = "Navigate Down", silent = true })
+
+set("n", "<leader>ww", "<CMD>w<CR><ESC>", { desc = "Save File" })
 set("n", "<leader>wq", "<CMD>wq<CR>", { desc = "Save File And Quit", silent = true })
 
 set("n", "<leader>dd", LazyVim.ui.bufremove, { desc = "Delete Buffer", silent = true })
