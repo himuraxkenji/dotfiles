@@ -3,6 +3,25 @@ return {
     "nvim-telescope/telescope.nvim",
     opts = {
       defaults = {
+        vimgrep_arguments = {
+          "rg",
+          -- "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
+
+          -- Exclude some patterns from search
+          "--glob=!**/.git/*",
+          "--glob=!**/.idea/*",
+          "--glob=!**/.vscode/*",
+          "--glob=!**/build/*",
+          "--glob=!**/dist/*",
+          "--glob=!**/yarn.lock",
+          "--glob=!**/package-lock.json",
+        },
         path_display = { "truncate" },
         sorting_strategy = "ascending",
         layout_config = {
@@ -11,6 +30,39 @@ return {
           width = 0.87,
           height = 0.80,
           preview_cutoff = 120,
+        },
+        mappings = {
+          i = {
+            ["<C-w>"] = "which_key",
+            ["<C-k>"] = "move_selection_previous",
+            ["<C-j>"] = "move_selection_next",
+            ["<C-h>"] = "preview_scrolling_up",
+            ["<C-l>"] = "preview_scrolling_down",
+            ["<esc>"] = "close",
+            ["<enter>"] = "select_tab",
+          },
+        },
+        find_files = {
+          hidden = true,
+        },
+      },
+      pickers = {
+        find_files = {
+          hidden = true,
+          -- needed to exclude some files & dirs from general search
+          -- when not included or specified in .gitignore
+          find_command = {
+            "rg",
+            "--files",
+            "--hidden",
+            "--glob=!**/.git/*",
+            "--glob=!**/.idea/*",
+            "--glob=!**/.vscode/*",
+            "--glob=!**/build/*",
+            "--glob=!**/dist/*",
+            "--glob=!**/yarn.lock",
+            "--glob=!**/package-lock.json",
+          },
         },
       },
     },
