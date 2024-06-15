@@ -9,6 +9,7 @@ return {
         "shellcheck",
         "shfmt",
         -- frontend
+        "angularls",
         "prettier",
         "eslint-lsp",
         -- rust
