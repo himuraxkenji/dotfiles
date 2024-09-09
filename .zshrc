@@ -19,6 +19,8 @@ eval "$(direnv hook zsh)"
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 
+eval "$(zoxide init zsh)"
+
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 

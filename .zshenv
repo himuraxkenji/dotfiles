@@ -15,3 +15,4 @@ export GOROOT=/usr/local/go
 export PATH=$PATH:$GOBIN:$GOROOT/bin
 export PATH=/usr/bin/aws_completer:$PATH
 
+. "$HOME/.cargo/env"
