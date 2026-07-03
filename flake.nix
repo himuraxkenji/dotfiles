@@ -26,6 +26,7 @@
           ./modules/opencode.nix
           ./modules/yabai.nix
           ./modules/skhd.nix
+          ./modules/sketchybar.nix
         ];
       };
     in {
