@@ -21,6 +21,7 @@
           ./modules/tmux.nix
           ./modules/zellij.nix
           ./modules/ghostty.nix
+          ./modules/nvim.nix
         ];
       };
     in {

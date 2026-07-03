@@ -21,7 +21,6 @@
     zsh
 
     # editor / terminal tooling
-    neovim
     zellij
     zoxide
     atuin
