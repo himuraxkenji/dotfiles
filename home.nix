@@ -31,7 +31,6 @@
     direnv
     carapace
     nushell
-    television
     yazi
     tree-sitter
     unzip

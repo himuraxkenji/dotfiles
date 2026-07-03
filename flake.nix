@@ -22,6 +22,7 @@
           ./modules/zellij.nix
           ./modules/ghostty.nix
           ./modules/nvim.nix
+          ./modules/television.nix
         ];
       };
     in {
