@@ -18,6 +18,7 @@
           ./modules/git.nix
           ./modules/starship.nix
           ./modules/fish.nix
+          ./modules/tmux.nix
         ];
       };
     in {

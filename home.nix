@@ -22,7 +22,6 @@
 
     # editor / terminal tooling
     neovim
-    tmux
     zellij
     zoxide
     atuin
