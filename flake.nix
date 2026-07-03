@@ -27,6 +27,7 @@
           ./modules/yabai.nix
           ./modules/skhd.nix
           ./modules/sketchybar.nix
+          ./modules/sdkman.nix
         ];
       };
     in {
