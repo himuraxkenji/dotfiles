@@ -25,6 +25,7 @@
           ./modules/television.nix
           ./modules/opencode.nix
           ./modules/yabai.nix
+          ./modules/skhd.nix
         ];
       };
     in {
