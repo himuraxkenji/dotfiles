@@ -13,7 +13,10 @@
     let
       mkHome = system: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs { inherit system; };
-        modules = [ ./home.nix ];
+        modules = [
+          ./home.nix
+          ./modules/git.nix
+        ];
       };
     in {
       homeConfigurations = {

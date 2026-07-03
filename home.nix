@@ -21,11 +21,6 @@
     zsh
     fish
 
-    # git / github
-    git
-    gh
-    lazygit
-
     # editor / terminal tooling
     neovim
     tmux
