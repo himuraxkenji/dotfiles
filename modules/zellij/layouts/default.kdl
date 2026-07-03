@@ -1,0 +1,37 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+              format_left   "{mode} #[fg=#cba6f7,bold]{tabs}"
+              format_center "#[fg=#cba6f7,bold]{session}"
+              format_right  "{command_git_branch} {datetime}"
+              format_space  ""
+
+              border_enabled  "false"
+              border_char     "─"
+              border_format   "#[fg=#fab387]{char}"
+              border_position "top"
+
+              mode_normal  "#[bg=#89b4fa] "
+              mode_tmux    "#[bg=#fab387] "
+
+              tab_normal   "#[fg=#6c7086]{index}:{name} "
+              tab_active   "#[fg=#f38ba8,bold,italic]{index}:{name} "
+
+              command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+              command_git_branch_format      "#[fg=#a6e3a1] {stdout} "
+              command_git_branch_interval    "10"
+              command_git_branch_rendermode  "static"
+
+              datetime        "#[fg=#89b4fa,bold] {format} "
+              datetime_format "%A, %d %b %Y %H:%M"
+              datetime_timezone "Europe/Berlin"
+            }
+        }
+        children
+    }
+
+    tab name="base" focus=true {
+        pane
+    }
+}
