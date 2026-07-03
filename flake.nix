@@ -9,12 +9,16 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
-    homeConfigurations.himura = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        system = builtins.currentSystem;
+  outputs = { nixpkgs, home-manager, ... }:
+    let
+      mkHome = system: home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { inherit system; };
+        modules = [ ./home.nix ];
       };
-      modules = [ ./home.nix ];
+    in {
+      homeConfigurations = {
+        himura-darwin = mkHome "aarch64-darwin";
+        himura-linux = mkHome "x86_64-linux";
+      };
     };
-  };
 }

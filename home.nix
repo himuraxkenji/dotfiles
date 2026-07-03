@@ -16,7 +16,51 @@
   # release notes.
   home.stateVersion = "25.11";
 
-  # home.packages = [ ];
+  home.packages = with pkgs; [
+    # shells
+    zsh
+    fish
+
+    # git / github
+    git
+    gh
+    lazygit
+
+    # editor / terminal tooling
+    neovim
+    tmux
+    zellij
+    starship
+    zoxide
+    atuin
+    fzf
+    ripgrep
+    bat
+    fd
+    direnv
+    carapace
+    nushell
+    television
+    yazi
+    tree-sitter
+    unzip
+
+    # language toolchains
+    nodejs
+    bun
+    pnpm
+    volta
+    go
+    cargo
+    uv
+
+    # nix tooling
+    nil
+    nixd
+
+    # nerd fonts
+    nerd-fonts.iosevka-term
+  ];
 
   # home.file = { };
 
