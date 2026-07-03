@@ -20,7 +20,8 @@ end
 # pnpm global executables (installed via Homebrew)
 set -gx PNPM_HOME $HOME/Library/pnpm
 
-# Priority: opencode > pnpm globals > local bins > nix > homebrew > system
-set -gx PATH $HOME/.opencode/bin $PNPM_HOME/bin $HOME/.local/bin $HOME/.local/state/nix/profiles/home-manager/home-path/bin $HOME/.nix-profile/bin /nix/var/nix/profiles/default/bin $PATH
+# Priority: pnpm globals > local bins > nix > homebrew > system
+# opencode comes from Nix (modules/opencode.nix) now, no separate PATH entry needed.
+set -gx PATH $PNPM_HOME/bin $HOME/.local/bin $HOME/.local/state/nix/profiles/home-manager/home-path/bin $HOME/.nix-profile/bin /nix/var/nix/profiles/default/bin $PATH
 
 set -gx GPG_TTY (tty)

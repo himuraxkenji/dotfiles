@@ -23,6 +23,7 @@
           ./modules/ghostty.nix
           ./modules/nvim.nix
           ./modules/television.nix
+          ./modules/opencode.nix
         ];
       };
     in {

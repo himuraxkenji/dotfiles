@@ -6,4 +6,4 @@ end
 
 alias fzfbat='fzf --preview="bat --theme=gruvbox-dark --color=always {}"'
 alias fzfnvim='nvim (fzf --preview="bat --theme=gruvbox-dark --color=always {}")'
-alias opencode-config='nvim ~/.opencode.json'
+alias opencode-config='nvim ~/.config/opencode/opencode.json'
