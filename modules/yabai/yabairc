@@ -1,0 +1,71 @@
+#!/usr/bin/env sh
+
+# Yabai configuration migrated from AeroSpace
+
+# Load scripting addition (required for native space switching with SIP partially disabled)
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+# global settings - visual enhancements
+yabai -m config mouse_follows_focus          on
+yabai -m config focus_follows_mouse          off
+yabai -m config window_origin_display        default
+yabai -m config window_placement             second_child
+yabai -m config window_shadow                on
+yabai -m config window_opacity               on
+yabai -m config window_opacity_duration      0.2
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.95
+yabai -m config window_animation_duration    0.0
+yabai -m config window_animation_easing      ease_out_circ
+yabai -m config insert_feedback_color        0xff61afef
+yabai -m config split_ratio                  0.50
+yabai -m config auto_balance                 off
+yabai -m config mouse_modifier               fn
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            swap
+
+# SketchyBar integration
+yabai -m config external_bar all:25:0
+
+# SketchyBar signals removed - sketchybar uses native space_change event
+
+# general space settings - beautiful spacing
+yabai -m config layout bsp
+yabai -m config top_padding 6
+yabai -m config bottom_padding 6
+yabai -m config left_padding 6
+yabai -m config right_padding 6
+yabai -m config window_gap 6
+
+# space labels
+# Display 1 (LG TV - Main): spaces 1-4
+# Space 5: temporary/extra
+# Space 6 (alt+6): Elgato Teleprompter
+# Space 7 (alt+7): Arzopa Portable Monitor
+yabai -m space 1 --label social 2>/dev/null || true
+yabai -m space 2 --label work 2>/dev/null || true
+yabai -m space 3 --label development 2>/dev/null || true
+yabai -m space 4 --label others 2>/dev/null || true
+yabai -m space 5 --label five 2>/dev/null || true
+yabai -m space 6 --label teleprompter 2>/dev/null || true
+yabai -m space 7 --label arzopa 2>/dev/null || true
+
+# ─────────────────────────────────────────────────────────────────────────────────
+# WINDOW RULES - Only launchers/overlays that truly need floating
+# ─────────────────────────────────────────────────────────────────────────────────
+
+yabai -m rule --add app="^Raycast$" manage=off
+yabai -m rule --add app="^Alfred$" manage=off
+yabai -m rule --add app="^1Password" manage=off
+
+# ─────────────────────────────────────────────────────────────────────────────────
+# SIGNALS
+# ─────────────────────────────────────────────────────────────────────────────────
+
+# Intentionally no auto-focus on window_destroyed.
+# The old focus_on_destroy signal could jump to unrelated spaces/windows while working.
+# Use skhd's manual rescue binding (alt + ctrl + space) when macOS leaves no useful focus.
+
+echo "yabai configuration loaded.."

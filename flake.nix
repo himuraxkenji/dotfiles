@@ -24,6 +24,7 @@
           ./modules/nvim.nix
           ./modules/television.nix
           ./modules/opencode.nix
+          ./modules/yabai.nix
         ];
       };
     in {
