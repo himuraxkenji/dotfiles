@@ -20,6 +20,7 @@
           ./modules/fish.nix
           ./modules/tmux.nix
           ./modules/zellij.nix
+          ./modules/ghostty.nix
         ];
       };
     in {
