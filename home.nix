@@ -19,7 +19,6 @@
   home.packages = with pkgs; [
     # shells
     zsh
-    fish
 
     # editor / terminal tooling
     neovim

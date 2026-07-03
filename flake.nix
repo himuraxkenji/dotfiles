@@ -17,6 +17,7 @@
           ./home.nix
           ./modules/git.nix
           ./modules/starship.nix
+          ./modules/fish.nix
         ];
       };
     in {
