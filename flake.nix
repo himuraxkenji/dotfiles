@@ -16,6 +16,7 @@
         modules = [
           ./home.nix
           ./modules/git.nix
+          ./modules/starship.nix
         ];
       };
     in {

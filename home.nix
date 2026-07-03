@@ -25,7 +25,6 @@
     neovim
     tmux
     zellij
-    starship
     zoxide
     atuin
     fzf
