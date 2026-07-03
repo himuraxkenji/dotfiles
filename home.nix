@@ -52,6 +52,15 @@
       # nerd fonts
       nerd-fonts.iosevka-term
     ];
+
+    sessionVariables = {
+      GOPATH = "$HOME/go";
+      GOBIN = "$HOME/go/bin";
+    };
+
+    sessionPath = [
+      "$HOME/go/bin"
+    ];
   };
 
   # Let Home Manager install and manage itself.

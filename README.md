@@ -61,11 +61,18 @@ bootstrap step needed.
 | `make build`   | Builds the activation package without applying it           |
 | `make check`   | `nix flake check` — evaluates the flake, no build           |
 | `make lint`    | `statix check .` + `deadnix .` — anti-patterns & dead code |
+| `make shell`   | Set the Nix-managed fish as your default login shell (see below) |
 
 ## 4. Set fish as your default shell
 
 Home Manager installs fish into the Nix profile, not into `/etc/shells` — you
 need one extra step so macOS/Linux will let you `chsh` into it:
+
+```sh
+make shell
+```
+
+That's `make shell` doing this, if you'd rather run it by hand:
 
 ```sh
 SHELL_PATH="$HOME/.local/state/nix/profiles/home-manager/home-path/bin/fish"
@@ -80,6 +87,28 @@ To switch back to zsh later (also installed via this flake):
 ```sh
 chsh -s "$HOME/.local/state/nix/profiles/home-manager/home-path/bin/zsh"
 ```
+
+## 5. Secrets (API keys, tokens)
+
+Nothing secret goes in this repo or in the Nix store — both end up
+world-readable (the Nix store is readable by every user on the machine, and
+this repo is public on GitHub). Instead, `modules/fish/conf.d/70-local.fish`
+sources `~/.secrets.fish` if it exists, and that file lives outside the repo
+entirely, untouched by `home-manager switch`.
+
+On each machine, create it by hand once:
+
+```sh
+cat > ~/.secrets.fish <<'EOF'
+set -gx OPENAI_API_KEY "sk-..."
+set -gx GH_TOKEN "ghp_..."
+EOF
+```
+
+Same pattern is used for the conditional git identity in `modules/git.nix`
+(`programs.git.includes[].path` points at a file outside the repo too) — the
+rule of thumb: anything Nix would otherwise bake into the store or this repo
+stays as an external file that Nix only references by path, never reads.
 
 ## Repo layout
 
