@@ -4,6 +4,12 @@ return {
       "catppuccin/nvim",
       name = "catppuccin",
       priority = 1000,
+      -- Force eager loading. Without this, lazy.nvim never runs this
+      -- plugin's config() before LazyVim's own init() calls
+      -- `vim.cmd.colorscheme(...)`, which resolves `require("catppuccin")`
+      -- straight off the runtimepath and skips setup()/config() entirely —
+      -- so it always applies default (opaque) options, not ours below.
+      lazy = false,
       opts = {
         flavour = "mocha", -- latte, frappe, macchiato, mocha
         transparent_background = true, -- disables setting the background color.
