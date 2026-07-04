@@ -38,6 +38,16 @@ in
         name = "catppuccin";
         src = catppuccinSrc;
       }
+      {
+        # oh-my-zsh-style git aliases (gst, gco, gc, gp, gl, gaa, ...) for fish.
+        name = "plugin-git";
+        src = pkgs.fetchFromGitHub {
+          owner = "jhillyerd";
+          repo = "plugin-git";
+          rev = "dd1f559c01cde4cf0d16581b60e20d29f33c0665";
+          sha256 = "sha256-ByEqv5mZ6S9K+Pkpf1Dybwfqh3x++3AhXaMtw0I3wDo=";
+        };
+      }
     ];
   };
 
