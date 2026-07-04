@@ -14,6 +14,12 @@ return {
         flavour = "mocha", -- latte, frappe, macchiato, mocha
         transparent_background = true, -- disables setting the background color.
         term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
+        -- transparent_background only covers the main window; floats/popups
+        -- (NormalFloat, Pmenu, Snacks picker, etc.) are a separate knob.
+        float = {
+          transparent = true,
+          solid = false,
+        },
       },
       -- catppuccin caches its compiled colorscheme on disk and only recompiles
       -- when its options hash changes. If LazyVim applies the colorscheme
