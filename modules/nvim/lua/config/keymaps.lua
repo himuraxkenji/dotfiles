@@ -137,6 +137,20 @@ vim.keymap.set("v", "<leader>sG", function()
   end
 end, { desc = "Grep Selected Text (Root Dir)" })
 
+----- LAZYDOCKER -----
+if vim.fn.executable("lazydocker") == 1 then
+  vim.keymap.set("n", "<leader>dd", function()
+    Snacks.terminal({ "lazydocker" }, { win = { style = "lazygit" } })
+  end, { desc = "Lazydocker" })
+end
+
+----- LAZYSSH -----
+if vim.fn.executable("lazyssh") == 1 then
+  vim.keymap.set("n", "<leader>dh", function()
+    Snacks.terminal({ "lazyssh" }, { win = { style = "lazygit" } })
+  end, { desc = "Lazyssh" })
+end
+
 -- Delete all marks
 vim.keymap.set("n", "<leader>md", function()
   vim.cmd("delmarks!")
