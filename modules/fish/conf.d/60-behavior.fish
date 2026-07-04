@@ -14,4 +14,10 @@ if not set -q TMUX; and not set -q ZELLIJ; and not set -q ZED_TERMINAL
     end
 end
 
-clear
+# Guard against "TERM environment variable not set." — clear (ncurses)
+# prints that warning to stderr instead of silently no-op'ing when $TERM
+# is unset at this point in shell startup (e.g. before a terminal's PTY
+# has fully attached).
+if test -n "$TERM"
+    clear
+end
