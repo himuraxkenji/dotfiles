@@ -35,6 +35,7 @@
       yazi
       tree-sitter
       unzip
+      lazydocker
 
       # language toolchains
       nodejs
