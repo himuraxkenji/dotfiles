@@ -36,6 +36,7 @@
       tree-sitter
       unzip
       lazydocker
+      lazyssh
 
       # language toolchains
       nodejs
