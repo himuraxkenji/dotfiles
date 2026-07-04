@@ -12,7 +12,7 @@
       font-family = "IosevkaTerm NF";
       font-size = 18;
 
-      background-opacity = 0.95;
+      background-opacity = 0.85;
       background-blur-radius = 20;
 
       window-decoration = true;
