@@ -29,7 +29,7 @@
       theme = "Catppuccin Mocha";
 
       # macOS Alt key fix
-      macos-option-as-alt = "left";
+      macos-option-as-alt = true;
 
       keybind = [
         "alt+left=unbind"
