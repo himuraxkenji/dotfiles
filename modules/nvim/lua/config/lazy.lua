@@ -40,6 +40,9 @@ end
 
 -- Setup lazy.nvim with the specified configuration
 require("lazy").setup({
+  -- Nix manages ~/.config/nvim as a read-only symlink into /nix/store,
+  -- so the lockfile must live in a writable path instead.
+  lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
   spec = {
     -- Add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
@@ -56,7 +59,7 @@ require("lazy").setup({
     -- Formatting plugins
 
     { import = "lazyvim.plugins.extras.lang.typescript" },
-    { import = "lazyvim.plugins.extras.formatting.biome" },
+    { import = "lazyvim.plugins.extras.lang.typescript.biome" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
 
     -- Linting plugins

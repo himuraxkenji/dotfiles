@@ -84,7 +84,7 @@ return {
     requires = { "nvim-tree/nvim-web-devicons", opt = true }, -- Optional dependency for icons
     opts = {
       options = {
-        theme = "catppuccin", -- Set the theme for lualine
+        theme = "catppuccin-nvim", -- Set the theme for lualine (auto-follows catppuccin's active flavour)
         icons_enabled = true, -- Enable icons in the statusline
       },
       sections = {
