@@ -61,7 +61,36 @@ bootstrap step needed.
 | `make build`   | Builds the activation package without applying it           |
 | `make check`   | `nix flake check` — evaluates the flake, no build           |
 | `make lint`    | `statix check .` + `deadnix .` — anti-patterns & dead code |
+| `make update`  | Updates Nix inputs + Homebrew tools with review-first output |
 | `make shell`   | Set the Nix-managed fish as your default login shell (see below) |
+
+### Updating versions (review-first flow)
+
+To update installed tool versions without immediately applying the environment:
+
+```sh
+make update
+```
+
+What it does:
+
+- Runs `nix flake update` (updates pinned `nixpkgs`/`home-manager` in `flake.lock`).
+- On macOS, runs Homebrew metadata update and upgrades managed formulas
+  (`yabai`, `skhd`, `sketchybar`) when installed.
+- Shows lockfile diff summary and Homebrew outdated state before/after.
+
+Recommended review before applying:
+
+```sh
+git --no-pager diff -- flake.lock
+brew outdated
+```
+
+Then apply the updated environment with:
+
+```sh
+make switch
+```
 
 ## 4. Set fish as your default shell
 
