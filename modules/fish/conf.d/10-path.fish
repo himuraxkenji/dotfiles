@@ -20,8 +20,12 @@ end
 # pnpm global executables (installed via Homebrew)
 set -gx PNPM_HOME $HOME/Library/pnpm
 
-# Priority: pnpm globals > local bins > nix > homebrew > system
+# npm global executables — npm's own prefix lives under the read-only Nix
+# store, so `npm install -g` needs a writable prefix outside it.
+set -gx NPM_CONFIG_PREFIX $HOME/.npm-global
+
+# Priority: pnpm globals > npm globals > local bins > nix > homebrew > system
 # opencode comes from Nix (modules/opencode.nix) now, no separate PATH entry needed.
-set -gx PATH $PNPM_HOME/bin $HOME/.local/bin $HOME/.local/state/nix/profiles/home-manager/home-path/bin $HOME/.nix-profile/bin /nix/var/nix/profiles/default/bin $PATH
+set -gx PATH $PNPM_HOME/bin $NPM_CONFIG_PREFIX/bin $HOME/.local/bin $HOME/.local/state/nix/profiles/home-manager/home-path/bin $HOME/.nix-profile/bin /nix/var/nix/profiles/default/bin $PATH
 
 set -gx GPG_TTY (tty)
