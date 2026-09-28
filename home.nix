@@ -22,7 +22,6 @@
       zsh
 
       # editor / terminal tooling
-      zellij
       zoxide
       atuin
       fzf

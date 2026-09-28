@@ -39,7 +39,12 @@
         "alt+v=new_split:right"
         "alt+d=new_split:down"
 
-        # Split navigation — unbound so Alt+hjkl reach Zellij
+        # Split navigation — unbound so Alt+hjkl reach the terminal
+        # multiplexer (herdr or zellij, see dotfiles.multiplexer). Verified
+        # against `herdr --default-config`: herdr ships no default bare
+        # alt+{h,j,k,l,v,d,s,left,right} bindings (its defaults are all
+        # prefix-mode, e.g. prefix+h/j/k/l for focus_pane_*), so there's no
+        # conflict with ghostty's alt+v/alt+d/alt+s splits below.
         "alt+k=unbind"
         "alt+j=unbind"
         "alt+h=unbind"

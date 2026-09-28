@@ -5,8 +5,9 @@ Declarative, reproducible dev environment for macOS and Linux, managed with
 [Home Manager](https://github.com/nix-community/home-manager) (no `nix-darwin`,
 no NixOS required).
 
-Managed tools: git/gh/lazygit, starship, fish, tmux, zellij, ghostty, neovim
-(LazyVim), television, opencode, sdkman, and — on macOS — yabai/skhd/sketchybar.
+Managed tools: git/gh/lazygit, starship, fish, tmux, herdr (default terminal
+multiplexer; zellij available as an alternative), ghostty, neovim (LazyVim),
+television, opencode, sdkman, and — on macOS — yabai/skhd/sketchybar.
 
 ## 1. Install Nix
 
@@ -91,6 +92,27 @@ Then apply the updated environment with:
 ```sh
 make switch
 ```
+
+## Terminal multiplexer
+
+Interactive fish shells (`modules/fish/conf.d/60-behavior.fish`) auto-attach
+to a terminal multiplexer on startup, falling back to `tmux` when the
+selected tool isn't installed. The choice is controlled by a home-manager
+option:
+
+```nix
+# home.nix (or per-host config)
+dotfiles.multiplexer = "herdr"; # default; set to "zellij" to switch back
+```
+
+- `"herdr"` (default) — installs `pkgs.herdr` and
+  `~/.config/herdr/config.toml` (`modules/herdr.nix`,
+  `modules/herdr/config.toml`): tmux-style `ctrl+a` prefix, catppuccin theme.
+- `"zellij"` — installs `pkgs.zellij` and its config/layouts/plugins
+  (`modules/zellij.nix`), restoring the previous default exactly.
+
+Only the selected tool's package/config is installed — switching values and
+running `make switch` removes the other tool's files.
 
 ## 4. Set fish as your default shell
 

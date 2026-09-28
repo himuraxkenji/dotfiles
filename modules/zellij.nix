@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
+  cfg = config.dotfiles;
+
   zjstatus = pkgs.fetchurl {
     url = "https://github.com/dj95/zjstatus/releases/download/v0.23.0/zjstatus.wasm";
     sha256 = "1zv173qh67x4bf4k4m5fpz22vy0pbp6f88c0c7dkjhjj4c9901p0";
@@ -11,7 +13,9 @@ let
     sha256 = "1ns9wjn1ncjapqpp9nn9kyhqydvl0fbnyiavd0lc3gcxa52l269i";
   };
 in
-{
+lib.mkIf (cfg.multiplexer == "zellij") {
+  home.packages = [ pkgs.zellij ];
+
   xdg.configFile = {
     "zellij/plugins/zjstatus.wasm".source = zjstatus;
     "zellij/plugins/zellij_forgot.wasm".source = zellijForgot;

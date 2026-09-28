@@ -7,11 +7,24 @@ set -gx EDITOR nvim
 set -gx VISUAL nvim
 
 if status is-interactive
-    if not set -q TMUX; and not set -q ZELLIJ; and not set -q ZED_TERMINAL
-        if type -q zellij
-            zellij attach -c main
-        else if type -q tmux
-            tmux new-session -A -s main
+    if not set -q TMUX; and not set -q ZELLIJ; and test "$HERDR_ENV" != 1; and not set -q ZED_TERMINAL
+        # $DOTFILES_MULTIPLEXER comes from modules/multiplexer.nix's generated
+        # fish/conf.d/05-multiplexer.fish (sourced before this file). If it's
+        # unset (e.g. snippet missing), fall back to the old zellij->tmux chain
+        # so the shell never fails to attach.
+        switch "$DOTFILES_MULTIPLEXER"
+            case herdr
+                if type -q herdr
+                    herdr --session main
+                else if type -q tmux
+                    tmux new-session -A -s main
+                end
+            case '*'
+                if type -q zellij
+                    zellij attach -c main
+                else if type -q tmux
+                    tmux new-session -A -s main
+                end
         end
     end
 

@@ -1,0 +1,21 @@
+# herdr configuration — generated for this dotfiles repo.
+#
+# Schema verified against `herdr --default-config` (herdr 0.9.1, via
+# `nix run nixpkgs#herdr -- --default-config`). Only the keys below are set;
+# everything else keeps herdr's built-in default.
+
+[theme]
+# Native built-in theme — no manual color table needed (confirmed via
+# `herdr --default-config`: built-ins include catppuccin, terminal,
+# tokyo-night, dracula, nord, gruvbox, one-dark, solarized, kanagawa,
+# rose-pine, vesper). "catppuccin" is the dark (mocha) variant; the light
+# counterpart is "catppuccin-latte".
+name = "catppuccin"
+
+[keys]
+# tmux-style prefix (tmux users commonly remap ctrl+b -> ctrl+a); herdr's
+# own default prefix-mode bindings (split_vertical = prefix+v,
+# split_horizontal = prefix+minus, detach = prefix+q, new_tab = prefix+c,
+# zoom = prefix+z, ...) already mirror tmux's, so only the prefix itself
+# needs to change.
+prefix = "ctrl+a"
