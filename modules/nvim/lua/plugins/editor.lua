@@ -81,4 +81,17 @@ return {
       },
     },
   },
+  {
+    -- Plugin: gitsigns.nvim
+    -- URL: https://github.com/lewis6991/gitsigns.nvim
+    -- Description: Gutter signs (+/-/~) plus an always-on virtual text blame for the current line.
+    "lewis6991/gitsigns.nvim",
+    event = "BufReadPre",
+    opts = {
+      current_line_blame = true,
+      current_line_blame_opts = {
+        delay = 300,
+      },
+    },
+  },
 }

@@ -35,6 +35,17 @@ vim.keymap.set("n", "<leader>ont", "<cmd>ObsidianNewFromTemplate<CR>", { desc = 
 vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search Obsidian" })
 vim.keymap.set("n", "<leader>oq", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Quick Switch" })
 
+----- GIT.NVIM -----
+-- LazyVim's default <leader>gb (Snacks.git.blame_line) loads on VeryLazy after
+-- git.nvim's lazy-key bind, so it silently wins. Re-bind here (also VeryLazy,
+-- but after LazyVim's defaults) to force git.nvim's full-file blame window.
+vim.keymap.set("n", "<leader>gb", "<cmd>GitBlame<CR>", { desc = "Git Blame (full file)" })
+
+-- Toggle gitsigns' always-on virtual text blame for the current line
+vim.keymap.set("n", "<leader>ub", function()
+  require("gitsigns").toggle_current_line_blame()
+end, { desc = "Toggle Current Line Blame" })
+
 ----- OIL -----
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
