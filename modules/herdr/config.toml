@@ -27,31 +27,33 @@ previous_agent = "prefix+alt+k"
 next_agent = "prefix+alt+j"
 focus_agent = "prefix+ctrl+1..9"
 
-# Vim-aware ctrl+h/j/k/l pane navigation. herdr has no conditional binding
-# primitive like tmux's `if-shell "$is_vim" ...`, so smart-nav.sh replicates
-# it: if the pane in focus is running nvim, forward the raw key so
-# smart-splits.nvim (+ its custom herdr mux backend) handles intra-nvim
-# splits and edge fallback; otherwise switch herdr panes directly.
+# Vim-aware ctrl+h/j/k/l pane navigation via smart-splits.nvim's official
+# herdr plugin (herdr-plugin.toml + scripts/herdr-navigate.sh, vendored at
+# ~/.local/share/nvim/lazy/smart-splits.nvim). type = "plugin_action" runs
+# synchronously in herdr (unlike type = "shell", which is detached/async and
+# raced with focus changes) — see README.md "#### Herdr" section. Requires
+# `herdr plugin link ~/.local/share/nvim/lazy/smart-splits.nvim` to be run
+# once (see modules/herdr.nix activation script).
 [[keys.command]]
 key = "ctrl+h"
-type = "shell"
-command = "$HOME/.config/herdr/smart-nav.sh left"
-description = "vim-aware pane left"
+type = "plugin_action"
+command = "smart-splits.nvim.left"
+description = "navigate left (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+j"
-type = "shell"
-command = "$HOME/.config/herdr/smart-nav.sh down"
-description = "vim-aware pane down"
+type = "plugin_action"
+command = "smart-splits.nvim.down"
+description = "navigate down (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+k"
-type = "shell"
-command = "$HOME/.config/herdr/smart-nav.sh up"
-description = "vim-aware pane up"
+type = "plugin_action"
+command = "smart-splits.nvim.up"
+description = "navigate up (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+l"
-type = "shell"
-command = "$HOME/.config/herdr/smart-nav.sh right"
-description = "vim-aware pane right"
+type = "plugin_action"
+command = "smart-splits.nvim.right"
+description = "navigate right (vim/herdr)"
