@@ -25,6 +25,7 @@ return {
     cmd = "Rest",
     keys = {
       { "<leader>r", "", desc = "+rest", ft = "http" },
+      { "<CR>", "<cmd>Rest run<cr>", mode = "n", desc = "Rest: run request under cursor", ft = "http" },
       { "<leader>rr", "<cmd>Rest run<cr>", desc = "Rest: run request", ft = "http" },
       { "<leader>rl", "<cmd>Rest last<cr>", desc = "Rest: run last request", ft = "http" },
       { "<leader>re", "<cmd>Rest env select<cr>", desc = "Rest: select env file", ft = "http" },
