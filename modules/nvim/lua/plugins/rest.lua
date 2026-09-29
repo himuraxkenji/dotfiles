@@ -81,6 +81,35 @@ local function preview_request()
   end
 end
 
+-- Go to the file referenced by an external body (`< ./f.json`, `<@ ./f.json`, `<@ latin1 ./f.json`), like
+-- kulala's `gd`. Relative paths resolve against the .http buffer's directory (as rest.nvim's parser does).
+-- `{{var}}` paths are not expanded. Other lines fall back to Vim's builtin `gd` (`normal!` = no mapping recursion).
+local function goto_referenced_file()
+  local rest = vim.api.nvim_get_current_line():match("^%s*<@?%s+(.-)%s*$")
+  if not rest or rest == "" then
+    return vim.cmd("normal! gd")
+  end
+  rest = rest:gsub("^([\"'])(.*)%1$", "%2")
+  if rest:find("{{", 1, true) then
+    return vim.notify("Rest: {{var}} in file path is not supported: " .. rest, vim.log.levels.WARN, { title = "rest.nvim" })
+  end
+  local base = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+  local function resolve(p)
+    p = vim.fn.expand(p) -- ~ and $ENV
+    return vim.fs.normalize(vim.startswith(p, "/") and p or vim.fs.joinpath(base, p))
+  end
+  local path = resolve(rest)
+  if not vim.uv.fs_stat(path) then
+    local stripped = rest:match("^%S+%s+(.+)$") -- `<@ latin1 ./f`: first word is the encoding
+    if stripped and vim.uv.fs_stat(resolve(stripped)) then
+      path = resolve(stripped)
+    else
+      return vim.notify("Rest: file not found: " .. path, vim.log.levels.WARN, { title = "rest.nvim" })
+    end
+  end
+  vim.cmd.edit(vim.fn.fnameescape(path))
+end
+
 return {
   -- Treesitter parser for http
   {
@@ -125,6 +154,7 @@ return {
       { "<leader>r", "", desc = "+rest", ft = "http" },
       { "<CR>", "<cmd>Rest run<cr>", mode = "n", desc = "Rest: run request under cursor", ft = "http" },
       { "K", preview_request, mode = "n", desc = "Rest: preview request (resolved vars)", ft = "http" },
+      { "gd", goto_referenced_file, mode = "n", desc = "Rest: go to referenced file", ft = "http" },
       { "<leader>rr", "<cmd>Rest run<cr>", desc = "Rest: run request", ft = "http" },
       { "<leader>rl", "<cmd>Rest last<cr>", desc = "Rest: run last request", ft = "http" },
       { "<leader>re", "<cmd>Rest env select<cr>", desc = "Rest: select env file", ft = "http" },
